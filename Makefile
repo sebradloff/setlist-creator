@@ -1,4 +1,4 @@
-.PHONY: help dev bootRun build-local build-and-run
+.PHONY: help dev bootRun build-local test build-and-run
 
 default: help
 
@@ -18,6 +18,9 @@ bootRun:
 
 build-local:
 	@./gradlew build --continuous
+
+test:
+	./gradlew clean build test
 
 build-and-run: ## Build the Docker image and make sure it works by running it
 	@docker run -v $(PWD):/app -w /app --rm openjdk:8-alpine ./gradlew clean build
