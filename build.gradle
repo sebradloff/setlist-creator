@@ -1,0 +1,39 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.8.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    mainClassName       = "io.sebradloff.setlistcreator.AppEntry"
+}
+
+jar {
+    baseName = "setlist-creator"
+    group    = "io.sebradloff"
+    version  = "0.0.1-SNAPSHOT"
+    manifest { attributes "Main-Class": "io.sebradloff.setlistcreator.AppEntry" }
+}
+
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web")
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+}
