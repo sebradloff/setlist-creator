@@ -1,4 +1,4 @@
-package io.sebradloff.setlistcreator;
+package io.sebradloff.setlistcreator.controllers;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -44,5 +44,13 @@ public class ArtistControllerTest {
             .perform(post("/visitors").contentType(APPLICATION_JSON).content("{\"typoName\": \"Hudson Mendes\"}"))
             .andExpect(status().isBadRequest())
             .andExpect(content().string("'name' is required."));
+    }
+
+    @Test
+    public void sayHello() throws Exception {
+        endpoint
+            .perform(post("/visitors/test").header("X-API-Version", "v1").contentType(APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0]").value("v1"));
     }
 }
